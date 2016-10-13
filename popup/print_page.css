@@ -1,0 +1,21 @@
+html, body {
+  width: 300px;
+}
+
+.page-print {
+  cursor: pointer;
+  font-size: 1.5em;
+  padding: 10px;
+  text-align: left;
+  width: 100%;
+}
+
+button {
+  background-color: #DAFFFF;
+  padding: 5px;
+  text-align: center;
+}
+
+button:hover {
+  background-color: #CFF2F2;
+}
