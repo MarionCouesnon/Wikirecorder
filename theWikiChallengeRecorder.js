@@ -1,16 +1,13 @@
-/* First, create a function that :
-- Listen to user clicks on hyperlinks*/
-//console.log("Wikichallenge recorder starts now!");
+if(!localStorage.getItem('WikiChallengeRecorder')) {
+  localStorage.setItem('WikiChallengeRecorder', '');
+}
+
 var index = parseInt(localStorage.getItem('WikiChallengeRecorderID')) || 0;
 var history = JSON.parse(localStorage.getItem('WikiChallengeRecorder'));
 
 window.addEventListener("click", function(event) {
     handleWindowClick(event);
 }, false);
-
-//1 get item, si vide, ajouter un objet vide
-//2 ajouter l'url a history dans l'objet
-//3 set item pour le sauver
 
 function handleWindowClick(event){
   console.log(event);
@@ -26,10 +23,8 @@ function handleWindowClick(event){
         text: textContent
       }
       console.log(history);
-      //debugger;
       localStorage.setItem('WikiChallengeRecorderID', index);
       localStorage.setItem('WikiChallengeRecorder', JSON.stringify(history));
-      //localStorage.setItem('WikiChallengeRecorder', '{"history" : ["aljdfalsdlfaskjdf"]}');
       alert("anchor link is clicked");
     }
     else if(origEl.parentNode.tagName === 'A'){
@@ -37,14 +32,33 @@ function handleWindowClick(event){
     }
 }
 
-/* Then, create a function for the global party */
+function generatePDF() {
+  var monpdf = new jsPDF();
+  var content = parseJSON(localStorage.getItem("WikiChallengeRecorder"));
+  var contentArray = [];
+  content.map(function(entry) {
+    contentArray.push(entry.url + " " + entry.text);
+  });
 
-/* Inside, create 3 functions for each game session*/
+  monpdf.text(contentArray);
+  monpdf.save(test.pdf);
+}
 
-/* Also, declare a variable for StartingPoint and another for EndingPoint */
-var StartingPoint;
-var EndingPoint;
+var currentURL = window.location.valueOf().href;
+var startingPoint;
+var endingPoint;
 
+///// MANCHE 1 ////
 /* Inside the 1st game session, create 1 condition that start listening the user actions if the user reached the defined starting point (wikipedia URL)  */
+startingPoint = 'https://fr.wikipedia.org/wiki/Cacaoyer';
+endingPoint = 'https://fr.wikipedia.org/wiki/Unterseeboot';
+if(currentURL == startingPoint) {
+  //localStorage.setItem('step', '0');
+}
+else if (currentURL == endingPoint) {
+  /* Stop the recording session */
 
-/* Inside the 1st game session, create 1 condition that stop listening the user actions if the user reached the defined ending point (wikipedia URL)  */
+}
+else {
+
+}
