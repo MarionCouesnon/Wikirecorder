@@ -5,6 +5,9 @@ if(!localStorage.getItem('WikiChallengeRecorder')) {
 var index = parseInt(localStorage.getItem('WikiChallengeRecorderID')) || 0;
 var history = JSON.parse(localStorage.getItem('WikiChallengeRecorder'));
 
+window.test = "ok";
+console.log("Still here?");
+
 window.addEventListener("click", function(event) {
     handleWindowClick(event);
 }, false);
