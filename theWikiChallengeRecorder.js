@@ -1,11 +1,3 @@
-if(!localStorage.getItem('WikiChallengeRecorder')) {
-  localStorage.setItem('WikiChallengeRecorder', '');
-}
-
-var index = parseInt(localStorage.getItem('WikiChallengeRecorderID')) || 0;
-var history = JSON.parse(localStorage.getItem('WikiChallengeRecorder'));
-
-window.test = "ok";
 console.log("Still here?");
 
 window.addEventListener("click", function(event) {
@@ -26,25 +18,13 @@ function handleWindowClick(event){
         text: textContent
       }
       console.log(history);
-      localStorage.setItem('WikiChallengeRecorderID', index);
-      localStorage.setItem('WikiChallengeRecorder', JSON.stringify(history));
+      localStorage.setItem('WikiChallengeRecorderID', index);//à remplacer par 1 message à envoyer au background pour envoyer l'index//
+      localStorage.setItem('WikiChallengeRecorder', JSON.stringify(history));//à remplacer par 1 message à envoyer au background pour envoyer l'history//
       alert("anchor link is clicked");
     }
     else if(origEl.parentNode.tagName === 'A'){
          alert("clicked inside anchor");
     }
-}
-
-function generatePDF() {
-  var monpdf = new jsPDF();
-  var content = parseJSON(localStorage.getItem("WikiChallengeRecorder"));
-  var contentArray = [];
-  content.map(function(entry) {
-    contentArray.push(entry.url + " " + entry.text);
-  });
-
-  monpdf.text(contentArray);
-  monpdf.save(test.pdf);
 }
 
 var currentURL = window.location.valueOf().href;
@@ -56,11 +36,10 @@ var endingPoint;
 startingPoint = 'https://fr.wikipedia.org/wiki/Cacaoyer';
 endingPoint = 'https://fr.wikipedia.org/wiki/Unterseeboot';
 if(currentURL == startingPoint) {
-  //localStorage.setItem('step', '0');
+  // Envoyer un message au background script pour signifier le starting point;
 }
 else if (currentURL == endingPoint) {
-  /* Stop the recording session */
-
+  // Envoyer un message au background script pour signifier le ending point;
 }
 else {
 
